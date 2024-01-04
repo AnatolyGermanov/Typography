@@ -1,6 +1,6 @@
 # Typography
 
-Упрощенная веб-версия Limehd
+Типография
 
 # Запуск backend
 
