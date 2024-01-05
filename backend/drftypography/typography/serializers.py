@@ -6,7 +6,7 @@ from .models import *
 class StaffSerializer(serializers.ModelSerializer):
     class Meta:
         model = Staff
-        fields = ('first_name', 'last_name', 'patronymic')
+        fields = ('id', 'first_name', 'last_name', 'patronymic')
 
 
 class ClientSerializer(serializers.ModelSerializer):
