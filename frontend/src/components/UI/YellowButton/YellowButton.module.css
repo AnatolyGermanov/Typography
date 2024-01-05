@@ -1,0 +1,9 @@
+.yellowButton {
+    padding: 5px 10px;
+
+    border-radius: 5px;
+
+    background-color: #fcdf00;
+
+    cursor: pointer;
+}
