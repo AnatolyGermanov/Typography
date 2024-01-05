@@ -4,7 +4,7 @@
 
 # Запуск backend
 
-1. Создайте вирутальное окружение в папке `backend` `python -m venv .venv`
+1. Создайте вирутальное окружение в папке `backend` командой `python -m venv .venv`
 2. Активируйте виртуальное окружение через `.\.venv\Scripts\activate`
 3. Скачайте все библиотеки `pip install -r requirements.txt`
 4. Перейдите в папку с проектом `drftypography`
