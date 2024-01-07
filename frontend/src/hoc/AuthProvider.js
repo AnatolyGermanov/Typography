@@ -29,6 +29,8 @@ function AuthProvider({children}) {
         
                 setUser(response.data)
             }
+            else
+                setUser(null)
           }
           catch (error) {
             console.log('Недопустимый токен')

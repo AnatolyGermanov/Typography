@@ -1,0 +1,17 @@
+.link {
+    display: inline-block;
+    position: relative;
+
+    padding: 20px;
+
+    text-decoration: none;
+    color: #000;
+}
+
+.link:hover {
+    text-decoration: solid underline #000;
+}
+
+.active {
+    background-color: rgb(254, 254, 216);
+}

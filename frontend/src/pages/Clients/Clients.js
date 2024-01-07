@@ -1,8 +1,7 @@
 import React from 'react'
-
 import Header from '../../components/Header/Header'
 
-function Orders() {
+function Clients() {
   return (
     <>
       <Header />
@@ -10,4 +9,4 @@ function Orders() {
   )
 }
 
-export default Orders
+export default Clients

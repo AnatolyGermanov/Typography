@@ -4,6 +4,7 @@ import RequireAuth from "../../hoc/RequireAuth"
 
 import Main from "../../pages/Main/Main"
 import Orders from "../../pages/Orders/Orders"
+import Clients from "../../pages/Clients/Clients"
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
     {
       path: "/orders",
       element: <RequireAuth><Orders /></RequireAuth>,
+    },
+    {
+      path: "/clients",
+      element: <RequireAuth><Clients /></RequireAuth>,
     },
 ])
 
