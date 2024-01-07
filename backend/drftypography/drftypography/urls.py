@@ -18,10 +18,11 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework import routers
 
-from typography.views import StaffViewSet
+from typography.views import *
 
 router = routers.SimpleRouter()
 router.register(r'stafflist', StaffViewSet)
+router.register(r'clientlist', ClientViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
