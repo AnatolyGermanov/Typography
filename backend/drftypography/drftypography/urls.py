@@ -23,6 +23,7 @@ from typography.views import *
 router = routers.SimpleRouter()
 router.register(r'stafflist', StaffViewSet)
 router.register(r'clientlist', ClientViewSet)
+router.register(r'orderlist', OrderViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

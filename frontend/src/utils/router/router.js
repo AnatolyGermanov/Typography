@@ -12,12 +12,12 @@ const router = createBrowserRouter([
       element: <Main />,
     },
     {
-      path: "/orders",
-      element: <RequireAuth><Orders /></RequireAuth>,
+      path: "/clients/",
+      element: <RequireAuth><Clients /></RequireAuth>,
     },
     {
-      path: "/clients",
-      element: <RequireAuth><Clients /></RequireAuth>,
+      path: "/orders/:id?/",
+      element: <RequireAuth><Orders /></RequireAuth>,
     },
 ])
 

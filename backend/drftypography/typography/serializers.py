@@ -16,6 +16,19 @@ class ClientSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    staff = StaffSerializer(read_only=True)
+    staff_id = serializers.PrimaryKeyRelatedField(
+        write_only=True,
+        queryset=Staff.objects.all(),
+        source='staff'
+    )
+    client = ClientSerializer(read_only=True)
+    client_id = serializers.PrimaryKeyRelatedField(
+        write_only=True,
+        queryset=Client.objects.all(),
+        source='client'
+    )
+
     class Meta:
         model = Order
         fields = '__all__'

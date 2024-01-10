@@ -17,7 +17,7 @@ function SignOn() {
 
     useEffect(() => {
         if (user) {
-            navigate('/orders')
+            navigate('/clients')
         }
     }, [user])
 

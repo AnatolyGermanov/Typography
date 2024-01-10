@@ -18,7 +18,7 @@ class Client(models.Model):
     last_name = models.CharField(max_length=50)
     patronymic = models.CharField(max_length=50, null=True, blank=True)
     phone_number = models.CharField(max_length=12)
-    passport_details = models.CharField(max_length=10, null=True, blank=True)
+    passport_details = models.CharField(max_length=12, null=True, blank=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
