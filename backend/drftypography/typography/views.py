@@ -24,3 +24,15 @@ class OrderViewSet(ModelViewSet):
     serializer_class = OrderSerializer
     permission_classes = (IsAuthenticated,)
 
+
+class OrderDetailViewSet(ModelViewSet):
+    queryset = OrderDetail.objects.all()
+    serializer_class = OrderDetailSerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class ServiceViewSet(ModelViewSet):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    permission_classes = (IsAuthenticated,)
+

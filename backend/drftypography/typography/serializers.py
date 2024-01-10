@@ -34,15 +34,22 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class OrderDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = OrderDetail
-        fields = '__all__'
-
-
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
+        fields = '__all__'
+
+
+class OrderDetailSerializer(serializers.ModelSerializer):
+    service = ServiceSerializer(read_only=True)
+    service_id = serializers.PrimaryKeyRelatedField(
+        write_only=True,
+        queryset=Service.objects.all(),
+        source='service'
+    )
+
+    class Meta:
+        model = OrderDetail
         fields = '__all__'
 
 

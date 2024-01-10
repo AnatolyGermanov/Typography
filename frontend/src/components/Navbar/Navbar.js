@@ -9,6 +9,7 @@ function Navbar() {
     <div className={styles.navBar}>
         <CustomNavLink to={'/clients'}>Клиенты</CustomNavLink>
         <CustomNavLink to={'/orders'}>Заказы</CustomNavLink>
+        <CustomNavLink to={'/orders/details'}>Детали заказа</CustomNavLink>
     </div>
   )
 }
