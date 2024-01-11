@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import useAuth from '../../hooks/useAuth'
 
@@ -17,6 +18,10 @@ function NewOrderForm({getOrders, setVisible}) {
     const clientRef = useRef()
     const target_dateRef = useRef()
     const {user} = useAuth()
+
+    const {clientId} = useParams()
+
+    const defaultOption = options.find((option) => option.value === Number(clientId))
 
     const getClients = async () => {
         try {
@@ -93,7 +98,7 @@ function NewOrderForm({getOrders, setVisible}) {
 
         <div className='verContainer'>
             <Label htmlFor='client'>Клиент</Label>
-            <Select id='client' placeholder='Выбрать клиента' required OnInputChange={handleInputChange} options={options} ref={clientRef} />
+            <Select id='client' placeholder='Выбрать клиента' required OnInputChange={handleInputChange} options={options} value={defaultOption} ref={clientRef} />
         </div>
         <div className='verContainer'>
             <Label htmlFor='target_date'>Дата планового выполнения</Label>

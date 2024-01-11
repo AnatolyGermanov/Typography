@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import instance from '../../utils/axios/instance'
 
@@ -15,6 +16,7 @@ import DeleteClientConfirm from './DeleteClientConfirm'
 import Input from '../UI/Input/Input'
 
 function ClientsList() {
+    const navigate = useNavigate()
     const [clientList, setClientList] = useState([])
     const [selectedClient, setSelectedClient] = useState(null)
     const [newClientFormVisible, setNewClientFormVisible] = useState(false)
@@ -96,6 +98,7 @@ function ClientsList() {
                     <>
                         <WhiteButton onClick={() => setChangeClientFormVisible(true)}>Изменить</WhiteButton>
                         <RedButton onClick={() => setDeleteClientConfirmVisible(true)}>Удалить</RedButton>
+                        <WhiteButton onClick={() => navigate(`/orders/${selectedClient.id}`)}>Детали</WhiteButton>
                     </>
                     : null
                 }

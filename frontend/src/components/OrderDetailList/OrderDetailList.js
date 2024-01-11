@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import instance from '../../utils/axios/instance'
 
@@ -15,6 +16,7 @@ import DeleteOrderDetailConfirm from './DeleteOrderDetailConfirm'
 import Input from '../UI/Input/Input'
 
 function OrderDetailList() {
+    const navigate = useNavigate()
     const [orderDetailList, setOrderDetailList] = useState([])
     const [selectedOrderDetail, setSelectedOrderDetail] = useState(null)
     const [newOrderDetailFormVisible, setNewOrderDetailFormVisible] = useState(false)
@@ -24,11 +26,16 @@ function OrderDetailList() {
     const [orderSearchQuery, setOrderSearchQuery] = useState('')
     const [searchedByOrderDetailList, setSearchedByOrderDetailList] = useState([])
 
+    const {orderId} = useParams()
+
     const getOrderDetails = async () => {
         const auth_token = localStorage.getItem('auth_token')
 
         try {
             const res = await instance.get('api/v1/orderdetaillist/', {
+                params: {
+                    orderId: orderId
+                },
                 headers: {
                     Authorization: `Token ${auth_token}`
                 }
@@ -43,7 +50,7 @@ function OrderDetailList() {
 
     useEffect(() => {
         getOrderDetails()
-    }, [])
+    }, [orderId])
 
     const selectOrderDetail = (orderDetail) => {
         setSelectedOrderDetail(orderDetail);
@@ -91,10 +98,15 @@ function OrderDetailList() {
                 }
             </ActionButtons>
 
-            <div className='searchContainer'>
-                <img src='/search-interface-symbol_54481.png' alt='Search' />
-                <Input id='orderSearch' type='number' placeholder='Поиск по № заказа...' value={orderSearchQuery} onChange={(event) => setOrderSearchQuery(event.target.value)} />
-            </div>
+            {orderId ?
+                <ActionButtons>
+                    <WhiteButton onClick={() => navigate(-1)}>Назад</WhiteButton>
+                </ActionButtons>
+                : <div className='searchContainer'>
+                    <img src='/search-interface-symbol_54481.png' alt='Search' />
+                    <Input id='orderSearch' type='number' placeholder='Поиск по № заказа...' value={orderSearchQuery} onChange={(event) => setOrderSearchQuery(event.target.value)} />
+                </div>
+            }
 
             <Table>
                 <OrderListHeader />

@@ -4,7 +4,7 @@ import { Link, useMatch } from 'react-router-dom'
 import styles from './CustomNavLink.module.css'
 
 function CustomNavLink({children, to, ...props}) {
-    const match = useMatch(to);
+    const match = useMatch({path: to, end: false});
   return (
     <Link
         to={to}

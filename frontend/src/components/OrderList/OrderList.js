@@ -13,8 +13,10 @@ import NewOrderForm from './NewOrderForm'
 import ChangeOrderForm from './ChangeOrderForm'
 import DeleteOrderConfirm from './DeleteOrderConfirm'
 import Input from '../UI/Input/Input'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function OrderList() {
+    const navigate = useNavigate()
     const [orderList, setOrderList] = useState([])
     const [selectedOrder, setSelectedOrder] = useState(null)
     const [newOrderFormVisible, setNewOrderFormVisible] = useState(false)
@@ -24,11 +26,16 @@ function OrderList() {
     const [clientSearchQuery, setClientSearchQuery] = useState('')
     const [searchedByClientOrderList, setSearchedByClientOrderList] = useState([])
 
+    const {clientId} = useParams()
+
     const getOrders = async () => {
         const auth_token = localStorage.getItem('auth_token')
         
         try {
             const res = await instance.get('api/v1/orderlist/', {
+                params: {
+                    clientId: clientId
+                },
                 headers: {
                     Authorization: `Token ${auth_token}`
                 }
@@ -43,7 +50,7 @@ function OrderList() {
     
     useEffect(() => {
         getOrders()
-    }, [])
+    }, [clientId])
     
     const selectOrder = (order) => {
         setSelectedOrder(order);
@@ -86,15 +93,21 @@ function OrderList() {
                     <>
                         <WhiteButton onClick={() => setChangeOrderFormVisible(true)}>Изменить</WhiteButton>
                         <RedButton onClick={() => setDeleteOrderConfirmVisible(true)}>Удалить</RedButton>
+                        <WhiteButton onClick={() => navigate(`/ordersdetails/${selectedOrder.id}`)}>Детали</WhiteButton>
                     </>
                     : null
                 }
             </ActionButtons>
 
-            <div className='searchContainer'>
-                <img src='/search-interface-symbol_54481.png' alt='Search' />
-                <Input id='clientSearch' type='text' placeholder='Поиск по заказчику...' value={clientSearchQuery} onChange={(event) => setClientSearchQuery(event.target.value)} />
-            </div>
+            {clientId ?
+                <ActionButtons>
+                    <WhiteButton onClick={() => navigate(-1)}>Назад</WhiteButton>
+                </ActionButtons>
+                : <div className='searchContainer'>
+                    <img src='/search-interface-symbol_54481.png' alt='Search' />
+                    <Input id='clientSearch' type='text' placeholder='Поиск по заказчику...' value={clientSearchQuery} onChange={(event) => setClientSearchQuery(event.target.value)} />
+                </div>
+            }
 
             <Table>
                 <OrderListHeader />

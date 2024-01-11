@@ -17,11 +17,11 @@ const router = createBrowserRouter([
       element: <RequireAuth><Clients /></RequireAuth>,
     },
     {
-      path: "/orders/",
+      path: "/orders/:clientId?",
       element: <RequireAuth><Orders /></RequireAuth>,
     },
     {
-      path: "/orders/details/",
+      path: "/ordersdetails/:orderId?",
       element: <RequireAuth><OrderDetails /></RequireAuth>,
     },
 ])

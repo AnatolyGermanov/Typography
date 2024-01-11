@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import Form from '../UI/Form/Form'
 import Label from '../UI/Label/Label'
@@ -15,6 +16,8 @@ function NewOrderDetailForm({getOrderDetails, setVisible}) {
     const order_idRef = useRef()
     const serviceRef = useRef()
     const amountRef = useRef()
+
+    const {orderId} = useParams()
 
     const getServices = async () => {
         try {
@@ -89,7 +92,7 @@ function NewOrderDetailForm({getOrderDetails, setVisible}) {
 
         <div className='verContainer'>
             <Label htmlFor='order_id'>№ заказа</Label>
-            <Input id='order_id' type='number' min='1' placeholder='№ заказа' required ref={order_idRef} />
+            <Input id='order_id' type='number' min='1' placeholder='№ заказа' required defaultValue={orderId || ''} ref={order_idRef} />
         </div>
         <div className='verContainer'>
             <Label htmlFor='service'>Услуга</Label>
