@@ -11,7 +11,7 @@ function ClientsListItem({client, isSelected, selectClient}) {
 
     const clientInfo = [
         client.id,
-        `${client.first_name} ${client.last_name[0]}. ${client.patronymic && client.patronymic[0] + '.'}`,
+        `${client.first_name} ${client.last_name} ${client.patronymic && client.patronymic}`,
         client.phone_number
     ];
 

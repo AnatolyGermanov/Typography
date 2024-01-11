@@ -40,7 +40,7 @@ function NewOrderDetailForm({getOrderDetails, setVisible}) {
 
         setOptions(
             filteredServices.map((service) => {
-                return {value: service.id, label: service.title}
+                return {value: service.id, label: `${service.title} | ${service.current_service_cost || '-'}`}
             })
         )
 

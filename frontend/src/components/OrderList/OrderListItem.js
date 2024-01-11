@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+
+import moment from 'moment'
+
 import Tr from '../UI/Tr/Tr'
 import Td from '../UI/Td/Td'
 
@@ -13,8 +16,9 @@ function OrderListItem({order, isSelected, selectOrder}) {
         order.id,
         `${order.client.first_name} ${order.client.last_name[0]}. ${order.client.patronymic && order.client.patronymic[0] + '.'}`,
         `${order.staff.last_name} ${order.staff.first_name[0]}. ${order.staff.patronymic && order.staff.patronymic[0] + '.'}`,
-        order.receipt_date,
-        order.target_date
+        moment(order.receipt_date).format('DD.MM.YYYY'),
+        moment(order.target_date).format('DD.MM.YYYY'),
+        order.total_order_cost
     ];
 
     return (

@@ -10,10 +10,11 @@ function OrderDetailListItem({orderDetail, isSelected, selectOrderDetail}) {
     }
 
     const orderDetailInfo = [
-        orderDetail.id,
         orderDetail.order,
         orderDetail.service.title,
         orderDetail.amount,
+        orderDetail.service_cost || '-',
+        orderDetail.service_cost ? orderDetail.service_cost * orderDetail.amount  : '-'
     ];
 
     return (

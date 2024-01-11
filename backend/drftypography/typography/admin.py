@@ -47,6 +47,6 @@ class ServiceAdmin(admin.ModelAdmin):
 
 @admin.register(ServiceCost)
 class ServiceCostAdmin(admin.ModelAdmin):
-    list_display = ('service', 'cost', )
+    list_display = ('service', 'cost', 'start', 'end' )
     search_fields = ('service', )
 

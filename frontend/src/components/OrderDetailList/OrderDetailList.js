@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import instance from '../../utils/axios/instance'
 
@@ -12,6 +12,7 @@ import Modal from '../UI/Modal/Modal'
 import NewOrderDetailForm from './NewOrderDetailForm'
 import ChangeOrderDetailForm from './ChangeOrderDetailForm'
 import DeleteOrderDetailConfirm from './DeleteOrderDetailConfirm'
+import Input from '../UI/Input/Input'
 
 function OrderDetailList() {
     const [orderDetailList, setOrderDetailList] = useState([])
@@ -20,6 +21,9 @@ function OrderDetailList() {
     const [changeOrderDetailFormVisible, setChangeOrderDetailFormVisible] = useState(false)
     const [deleteOrderDetailConfirmVisible, setDeleteOrderDetailConfirmVisible] = useState(false)
     
+    const [orderSearchQuery, setOrderSearchQuery] = useState('')
+    const [searchedByOrderDetailList, setSearchedByOrderDetailList] = useState([])
+
     const getOrderDetails = async () => {
         const auth_token = localStorage.getItem('auth_token')
 
@@ -45,6 +49,16 @@ function OrderDetailList() {
         setSelectedOrderDetail(orderDetail);
     }
 
+    useMemo(() => {
+        setSearchedByOrderDetailList(
+            orderSearchQuery ?
+            orderDetailList.filter((orderDetail) => {
+                return orderDetail.order === Number(orderSearchQuery)
+            })
+            : orderDetailList
+        )
+    }, [orderSearchQuery, orderDetailList])
+
     return (
         <>
             {newOrderDetailFormVisible ?
@@ -65,6 +79,7 @@ function OrderDetailList() {
                 </Modal>
                 : null
             }
+
             <ActionButtons>
                 <WhiteButton onClick={() => setNewOrderDetailFormVisible(true)}>Создать</WhiteButton>
                 {selectedOrderDetail ?
@@ -75,11 +90,17 @@ function OrderDetailList() {
                     : null
                 }
             </ActionButtons>
+
+            <div className='searchContainer'>
+                <img src='/search-interface-symbol_54481.png' alt='Search' />
+                <Input id='orderSearch' type='number' placeholder='Поиск по № заказа...' value={orderSearchQuery} onChange={(event) => setOrderSearchQuery(event.target.value)} />
+            </div>
+
             <Table>
                 <OrderListHeader />
                 <tbody>
-                    {orderDetailList.length ?
-                        orderDetailList.map((orderDetail) => {
+                    {searchedByOrderDetailList.length ?
+                        searchedByOrderDetailList.map((orderDetail) => {
                             return <OrderListItem 
                                         key={orderDetail.id}
                                         orderDetail={orderDetail}

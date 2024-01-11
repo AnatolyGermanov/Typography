@@ -7,10 +7,11 @@ function OrderDetailListHeader() {
   return (
     <thead>
         <Tr>
-            <Th>№</Th>
             <Th>№ заказа</Th>
             <Th>Услуга</Th>
             <Th>Количество</Th>
+            <Th>Цена</Th>
+            <Th>Сумма</Th>
         </Tr>
     </thead>
   )

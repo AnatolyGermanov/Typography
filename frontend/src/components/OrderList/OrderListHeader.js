@@ -12,6 +12,7 @@ function OrderListHeader() {
             <Th>Сотрудник</Th>
             <Th>Дата приема</Th>
             <Th>Дата планового выполнения</Th>
+            <Th>Стоимость</Th>
         </Tr>
     </thead>
   )

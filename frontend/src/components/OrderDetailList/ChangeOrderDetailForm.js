@@ -11,7 +11,7 @@ import Select from '../UI/Select/Select'
 function ChangeOrderForm({orderDetail, getOrderDetails, setVisible}) {
     const [services, setServices] = useState([])
     const [options, setOptions] = useState([])
-    const defaultOption = {value: orderDetail.service.id, label: orderDetail.service.title}
+    const defaultOption = {value: orderDetail.service.id, label: `${orderDetail.service.title} | ${orderDetail.service.current_service_cost || '-'}`}
 
     const [searchQuery, setSearchQuery] = useState('')
     const order_idRef = useRef()
@@ -43,7 +43,7 @@ function ChangeOrderForm({orderDetail, getOrderDetails, setVisible}) {
 
         setOptions(
             filteredServices.map((service) => {
-                return {value: service.id, label: service.title}
+                return {value: service.id, label: `${service.title} | ${service.current_service_cost || '-'}`}
             })
         )
 

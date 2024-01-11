@@ -50,6 +50,8 @@ class Service(models.Model):
 class ServiceCost(models.Model):
     service = models.ForeignKey('Service', on_delete=models.CASCADE)
     cost = models.DecimalField(max_digits=12, decimal_places=2)
+    start = models.DateField()
+    end = models.DateField()
 
     def __str__(self):
         return f'{self.service} {self.cost}'

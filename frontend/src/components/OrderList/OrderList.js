@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import instance from '../../utils/axios/instance'
 
@@ -12,6 +12,7 @@ import Modal from '../UI/Modal/Modal'
 import NewOrderForm from './NewOrderForm'
 import ChangeOrderForm from './ChangeOrderForm'
 import DeleteOrderConfirm from './DeleteOrderConfirm'
+import Input from '../UI/Input/Input'
 
 function OrderList() {
     const [orderList, setOrderList] = useState([])
@@ -20,30 +21,43 @@ function OrderList() {
     const [changeOrderFormVisible, setChangeOrderFormVisible] = useState(false)
     const [deleteOrderConfirmVisible, setDeleteOrderConfirmVisible] = useState(false)
     
+    const [clientSearchQuery, setClientSearchQuery] = useState('')
+    const [searchedByClientOrderList, setSearchedByClientOrderList] = useState([])
+
     const getOrders = async () => {
         const auth_token = localStorage.getItem('auth_token')
-
+        
         try {
             const res = await instance.get('api/v1/orderlist/', {
                 headers: {
                     Authorization: `Token ${auth_token}`
                 }
             })
-
+            
             setOrderList(res.data)
         }
         catch (error) {
             
         }
     }
-
+    
     useEffect(() => {
         getOrders()
     }, [])
-
+    
     const selectOrder = (order) => {
         setSelectedOrder(order);
     }
+    
+    useMemo(() => {
+        setSearchedByClientOrderList(
+            orderList.filter((order) => {
+                return order.client.first_name.toLowerCase().includes(clientSearchQuery.toLowerCase()) ||
+                    order.client.last_name.toLowerCase().includes(clientSearchQuery.toLowerCase()) ||
+                    order.client.patronymic.toLowerCase().includes(clientSearchQuery.toLowerCase())
+            })
+        )
+    }, [clientSearchQuery, orderList])
 
     return (
         <>
@@ -65,6 +79,7 @@ function OrderList() {
                 </Modal>
                 : null
             }
+
             <ActionButtons>
                 <WhiteButton onClick={() => setNewOrderFormVisible(true)}>Создать</WhiteButton>
                 {selectedOrder ?
@@ -75,11 +90,17 @@ function OrderList() {
                     : null
                 }
             </ActionButtons>
+
+            <div className='searchContainer'>
+                <img src='/search-interface-symbol_54481.png' alt='Search' />
+                <Input id='clientSearch' type='text' placeholder='Поиск по заказчику...' value={clientSearchQuery} onChange={(event) => setClientSearchQuery(event.target.value)} />
+            </div>
+
             <Table>
                 <OrderListHeader />
                 <tbody>
-                    {orderList.length ?
-                        orderList.map((order) => {
+                    {searchedByClientOrderList.length ?
+                        searchedByClientOrderList.map((order) => {
                             return <OrderListItem 
                                         key={order.id}
                                         order={order}
