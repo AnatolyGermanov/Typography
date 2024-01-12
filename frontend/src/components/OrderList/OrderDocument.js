@@ -206,7 +206,7 @@ function OrderDocument({order}) {
 
         // Устанавливаем href на созданный URL и даем имя скачиваемому файлу
         a.href = url;
-        a.download = "document.docx";
+        a.download = `${order.client.first_name} ${order.client.last_name[0]}. ${order.client.patronymic && order.client.patronymic[0] + '.'} Договор №${order.id}.docx`;
 
         // Инициируем клик по ссылке, что приведёт к скачиванию файла
         a.click();
