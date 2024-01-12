@@ -9,7 +9,7 @@ function DeleteOrderConfirm({orderDetail, getOrderDetails, selectOrderDetail, se
         try {
             const auth_token = localStorage.getItem('auth_token')
 
-            await instance.delete(`api/v1/orderlist/${orderDetail.id}/`, {
+            await instance.delete(`api/v1/orderdetaillist/${orderDetail.id}/`, {
                 headers: {
                     Authorization: `Token ${auth_token}`
                 }
