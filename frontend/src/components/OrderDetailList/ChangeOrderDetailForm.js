@@ -92,7 +92,7 @@ function ChangeOrderForm({orderDetail, getOrderDetails, setVisible}) {
 
         <div className='verContainer'>
             <Label htmlFor='order_id'>№ заказа</Label>
-            <Input id='order_id' type='number' min='1' placeholder='№ заказа' required defaultValue={orderDetail.order} ref={order_idRef} />
+            <Input id='order_id' type='number' min='1' placeholder='№ заказа' required readOnly defaultValue={orderDetail.order} ref={order_idRef} />
         </div>
         <div className='verContainer'>
             <Label htmlFor='service'>Услуга</Label>
