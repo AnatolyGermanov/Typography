@@ -14,6 +14,7 @@ import ChangeOrderForm from './ChangeOrderForm'
 import DeleteOrderConfirm from './DeleteOrderConfirm'
 import Input from '../UI/Input/Input'
 import { useNavigate, useParams } from 'react-router-dom'
+import OrderDocument from './OrderDocument'
 
 function OrderList() {
     const navigate = useNavigate()
@@ -94,6 +95,7 @@ function OrderList() {
                         <WhiteButton onClick={() => setChangeOrderFormVisible(true)}>Изменить</WhiteButton>
                         <RedButton onClick={() => setDeleteOrderConfirmVisible(true)}>Удалить</RedButton>
                         <WhiteButton onClick={() => navigate(`/ordersdetails/${selectedOrder.id}`)}>Детали</WhiteButton>
+                        <OrderDocument order={selectedOrder} />
                     </>
                     : null
                 }

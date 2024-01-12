@@ -44,7 +44,7 @@ class OrderSerializer(serializers.ModelSerializer):
             serializer = OrderDetailSerializer(detail)
             service_cost = serializer.get_service_cost(detail)
             if service_cost is not None:
-                total_cost += service_cost
+                total_cost += service_cost*detail.amount
 
         return total_cost
 
