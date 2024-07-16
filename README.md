@@ -1,8 +1,22 @@
 # Typography
 
+## Описание
+
 Информационная система типографии
 
-# Запуск backend
+## Технологии
+
+### Backend
+
+- Django
+- Django REST Framework
+- Djoser
+
+### Frontend
+
+- React
+
+## Запуск backend
 
 1. Создайте вирутальное окружение в папке `backend` командой `python -m venv .venv`
 2. Активируйте виртуальное окружение через `.\.venv\Scripts\activate`
@@ -12,7 +26,7 @@
 6. Запустите миграцию `python manage.py migrate`
 7. Запустите сервер `python manage.py runserver`
 
-# Запуск frontend
+## Запуск frontend
 
 1. Установите все бибилиотеки `npm i`
 2. Запустите приложение `npm start`
